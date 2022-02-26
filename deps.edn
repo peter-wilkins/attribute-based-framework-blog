@@ -6,8 +6,10 @@
   com.wsscode/pathom3 {:mvn/version "2022.02.21-alpha"}
   org.clojure/clojure {:mvn/version "1.10.1"}
   macroz/tangle {:mvn/version "0.2.2"}
+  com.xtdb/xtdb-core {:mvn/version "1.20.0"}
+  com.xtdb/xtdb-rocksdb {:mvn/version "1.20.0"}
   }
 
  :aliases
- {:ip-weather {:exec-fn com.example.weather/main}}
- :graphviz {:exec-fn com.example.weather/graphviz}}
+ {:ip-weather {:exec-fn com.example.weather/main}
+  :graphviz {:exec-fn com.example.graphviz/make-graph}}}

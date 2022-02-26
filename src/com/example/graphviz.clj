@@ -9,17 +9,14 @@
     (for [input (->> reached-via keys (mapcat identity))]
       [input node])))
 
-(defn make-graph []
+(defn make-graph [_]
   (let [index-attributes (->> w/env ::pci/index-attributes)
         nodes (->> index-attributes keys (filter keyword?))
         edges (mapcat (partial make-edge index-attributes) nodes)
         dot (t/graph->dot nodes edges {:node {:shape :box}
-                                       :node->id (fn [n] (if (keyword? n) (name n) (:id n)))
-                                       :node->descriptor (fn [n] (when-not (keyword? n) n))
-                                       :directed? true
-                                       })]
+                                       :directed? true})]
     (io/copy (t/dot->image dot "png") (io/file "images/weather.png"))))
 
 (comment
-  (make-graph)
+  (make-graph {})
   )
