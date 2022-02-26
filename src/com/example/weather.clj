@@ -31,14 +31,29 @@
        first
        :the_temp)})
 
+(pco/defresolver cold?
+  [{:keys [:temperature]}]
+  {:cold? (< temperature 0)})
+
 (def env
   (pci/register [ip->lat-long
                  latlong->woeid
-                 woeid->temperature]))
+                 woeid->temperature
+                 cold?]))
 
-(defn main [args]
-  ; start smart maps with call args, if no args print valid entry points to graph
-  (if (seq args)
-    (let [sm (psm/smart-map env args)]
-      (println (str "It's currently " (:temperature sm) "C at " (pr-str args))))
-    (println "USAGE: valid inputs include " (-> env ::pci/index-io keys))))
+(defn print-node [[inputs outputs]]
+  (str (vec inputs) " => " (->> outputs keys vec) "\n"))
+
+(defn main [args-map]
+  ; start smart maps with call args, if no args prints usage and graph
+  (if (seq args-map)
+    (let [output (:output args-map)
+          input (dissoc args-map :output)
+          sm (psm/smart-map env input)]
+      (println (name output) ":" (sm output)))
+    (println "USAGE: clj -X:ip-weather [INPUT key pairs] [:output OUTPUT]\n Available Nodes:\n" (->> env ::pci/index-io (map print-node)))))
+
+(comment
+  (main {:ip "198.29.213.3" :output :cold?})
+  ; clj -X:ip-weather :ip '"198.29.213.3"' :output :cold?
+  )
