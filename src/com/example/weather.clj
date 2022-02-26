@@ -37,6 +37,8 @@
                  woeid->temperature]))
 
 (defn main [args]
-  ; start smart maps with call args
-  (let [sm (psm/smart-map env args)]
-    (println (str "It's currently " (:temperature sm) "C at " (pr-str args)))))
+  ; start smart maps with call args, if no args print valid entry points to graph
+  (if (seq args)
+    (let [sm (psm/smart-map env args)]
+      (println (str "It's currently " (:temperature sm) "C at " (pr-str args))))
+    (println "USAGE: valid inputs include " (-> env ::pci/index-io keys))))
