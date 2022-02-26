@@ -4,8 +4,10 @@
  :deps
  {cheshire/cheshire {:mvn/version "5.10.0"}
   com.wsscode/pathom3 {:mvn/version "2022.02.21-alpha"}
-  org.clojure/clojure {:mvn/version "1.10.1"}}
+  org.clojure/clojure {:mvn/version "1.10.1"}
+  macroz/tangle {:mvn/version "0.2.2"}
+  }
 
  :aliases
- {:ip-weather
-  {:exec-fn com.example.weather/main}}}
+ {:ip-weather {:exec-fn com.example.weather/main}}
+ :graphviz {:exec-fn com.example.weather/graphviz}}
