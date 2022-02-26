@@ -1,0 +1,11 @@
+{:paths
+ ["src"]
+
+ :deps
+ {cheshire/cheshire {:mvn/version "5.10.0"}
+  com.wsscode/pathom3 {:mvn/version "2022.02.21-alpha"}
+  org.clojure/clojure {:mvn/version "1.10.1"}}
+
+ :aliases
+ {:ip-weather
+  {:exec-fn com.example.weather/main}}}
