@@ -37,7 +37,7 @@
        :the_temp)})
 
 (pco/defresolver cold?
-  [{:keys [:temperature]}]
+  [{:keys [temperature]}]
   {:cold? (< temperature 0)})
 
 (pco/defresolver user
